@@ -4,15 +4,25 @@ import './App.css';
 import Header from './Components/Header';
 import MainContent from './Components/MainContent';
 import {ThemeContext} from './Components/ThemeContext/themeContext';
+import { 
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
 function App() {
   const themeContext = useContext(ThemeContext);
   return (
     <AppContainer className={themeContext.theme}>
-      <Header />
-      <ContentContainer>
-        <MainContent/>
-      </ContentContainer>
+      <Router>
+        <Header />
+        <ContentContainer>
+          <Routes>
+            <Route exact path='/' element={<MainContent/>} />
+            <Route path='/region/:regionName' element={<MainContent/>} />
+          </Routes>
+        </ContentContainer>
+      </Router>
     </AppContainer>
   );
 }

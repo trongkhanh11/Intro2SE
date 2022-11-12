@@ -3,17 +3,24 @@ import { FaChevronDown } from "react-icons/fa";
 import styled from "styled-components";
 import {ThemeContext} from '../../ThemeContext/themeContext';
 import Options from "./Options";
+import{useParams} from 'react-router-dom';
 
 function Filter(props) {
     const themeContext = useContext(ThemeContext);
     const refSelect = useRef(null);
     const [isShowOptions, setIsShowOptions] = useState(false);
+    const {regionName} = useParams();
+    const [valueOption, setValueOption] = useState('All');
 
     const handleOptions = (e) => {
         if(refSelect.current) 
             setIsShowOptions(refSelect.current.contains(e.target))
     }
-
+    
+    useEffect(() => {
+        if (regionName) setValueOption(regionName);
+        else setValueOption('All');
+    }, [regionName])
     useEffect(() => {
         if(isShowOptions) {
             document.addEventListener('click', handleOptions);
@@ -32,7 +39,7 @@ function Filter(props) {
                     ref={refSelect}
                     onClick={handleOptions}
                 >
-                    <span>All</span>
+                    <span>{valueOption}</span>
                     <FaChevronDown />
                 </Select>
                 <Options isShowOptions={isShowOptions}/>
