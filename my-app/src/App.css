@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+:root {
+  --IconSwitchColor: hsl(51, 96%, 61%);
+  --ToggleButtonBackground: hsl(208, 59%, 41%);
+}
