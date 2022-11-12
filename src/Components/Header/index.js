@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 import SwitchMode from './SwitchMode';
+import {ThemeContext} from '../ThemeContext/themeContext';
+import { useContext } from 'react';
 
 function Header() {
+    const themeContext = useContext(ThemeContext);
     return (
-        <HeaderPane>
+        <HeaderPane className={themeContext.theme}>
             <span>Where in the world?</span>
             <SwitchMode />
         </HeaderPane>

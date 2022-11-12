@@ -1,9 +1,11 @@
 import {RiMoonFill} from 'react-icons/ri';
 import {BsFillSunFill} from 'react-icons/bs'
 import styles from './SwitchStyles.module.scss';
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useRef, useState, useContext} from 'react'
+import {ThemeContext} from '../ThemeContext/themeContext';
 
 function SwitchMode() {
+    const themeContext = useContext(ThemeContext);
     const refInput = useRef();
     const refCircle = useRef();
     const refToggle = useRef();
@@ -16,6 +18,7 @@ function SwitchMode() {
     const handleToggle = () => {
         refInput.current.checked = !refInput.current.checked;
         setIsDark(refInput.current.checked);
+        themeContext.toggleTheme();
     }
 
     useEffect(() => {
