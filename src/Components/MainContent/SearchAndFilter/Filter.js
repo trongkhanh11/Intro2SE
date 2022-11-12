@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import {GiEarthAsiaOceania, GiWorld} from 'react-icons/gi';
-import {FaChevronDown, FaGlobeAfrica, FaGlobeAmericas, FaGlobeAsia, FaGlobeEurope} from 'react-icons/fa';
+import React, { useContext, useRef, useState, useEffect} from "react";
+import { FaChevronDown } from "react-icons/fa";
 import styled from "styled-components";
 import {ThemeContext} from '../../ThemeContext/themeContext';
+import Options from "./Options";
 
 function Filter(props) {
     const themeContext = useContext(ThemeContext);
@@ -10,14 +10,15 @@ function Filter(props) {
     const [isShowOptions, setIsShowOptions] = useState(false);
 
     const handleOptions = (e) => {
-        if(refSelect.current) setIsShowOptions(refSelect.current.contains(e.target))
+        if(refSelect.current) 
+            setIsShowOptions(refSelect.current.contains(e.target))
     }
 
     useEffect(() => {
         if(isShowOptions) {
-            document.addEventListener('click', handleOptions)
+            document.addEventListener('click', handleOptions);
             return () => {
-                document.removeEventListener('click', handleOptions)
+                document.removeEventListener('click', handleOptions);
             }
         }
     }, [isShowOptions])
@@ -34,32 +35,7 @@ function Filter(props) {
                     <span>All</span>
                     <FaChevronDown />
                 </Select>
-                <OptionsPane className={themeContext.theme}>
-                    <OptionItem>
-                        <GiWorld />
-                        <span>All</span>
-                    </OptionItem>
-                    <OptionItem>
-                        <FaGlobeAfrica />
-                        <span>Americas</span>
-                    </OptionItem>
-                    <OptionItem>
-                        <FaGlobeAmericas />
-                        <span>Americas</span>
-                    </OptionItem>
-                    <OptionItem>
-                        <FaGlobeAsia />
-                        <span>Asia</span>
-                    </OptionItem>
-                    <OptionItem>
-                        <FaGlobeEurope />
-                        <span>Europe</span>
-                    </OptionItem>
-                    <OptionItem>
-                        <GiEarthAsiaOceania />
-                        <span>Oceania</span>
-                    </OptionItem>
-                </OptionsPane>
+                <Options isShowOptions={isShowOptions}/>
             </SelectPane>
         </FilterPane>
     )
@@ -98,32 +74,5 @@ const Select = styled.div`
     span {
         font-size: 18px;
         font-weight: bold;
-    }
-`;
-
-const OptionsPane = styled.ul`
-    width: 100%;
-    margin-top: 2px;
-    border-radius: 4px;
-    position: absolute;
-    overflow: hidden;
-    z-index: 10;
-`;
-
-const OptionItem = styled.li`
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 4px 8px;
-
-    &:hover {
-        font-weight: bold;
-        background: var(--SelectOptionBackground);
-    }
-
-    span {
-        margin-left: 4px;
     }
 `;
