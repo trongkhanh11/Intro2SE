@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {GiEarthAsiaOceania, GiWorld} from 'react-icons/gi';
 import {FaChevronDown, FaGlobeAfrica, FaGlobeAmericas, FaGlobeAsia, FaGlobeEurope} from 'react-icons/fa';
 import styled from "styled-components";
@@ -6,11 +6,31 @@ import {ThemeContext} from '../../ThemeContext/themeContext';
 
 function Filter(props) {
     const themeContext = useContext(ThemeContext);
+    const refSelect = useRef(null);
+    const [isShowOptions, setIsShowOptions] = useState(false);
+
+    const handleOptions = (e) => {
+        if(refSelect.current) setIsShowOptions(refSelect.current.contains(e.target))
+    }
+
+    useEffect(() => {
+        if(isShowOptions) {
+            document.addEventListener('click', handleOptions)
+            return () => {
+                document.removeEventListener('click', handleOptions)
+            }
+        }
+    }, [isShowOptions])
+
     return (
         <FilterPane>
             <h3>Filter by regions:</h3>
             <SelectPane>
-                <Select className={themeContext.theme}>
+                <Select 
+                    className={themeContext.theme} 
+                    ref={refSelect}
+                    onClick={handleOptions}
+                >
                     <span>All</span>
                     <FaChevronDown />
                 </Select>
@@ -18,6 +38,10 @@ function Filter(props) {
                     <OptionItem>
                         <GiWorld />
                         <span>All</span>
+                    </OptionItem>
+                    <OptionItem>
+                        <FaGlobeAfrica />
+                        <span>Americas</span>
                     </OptionItem>
                     <OptionItem>
                         <FaGlobeAmericas />
