@@ -29,7 +29,7 @@ function SwitchMode() {
             }
             else {
                 refCircle.current.style.background = '#fff';
-                refToggle.current.style.background = 'hsl(208, 59%, 41%)';
+                refToggle.current.style.background = 'var(--ToggleButtonBackground)';
             }
         }
         changeBackgroundButton();
