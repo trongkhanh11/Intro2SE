@@ -9,6 +9,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import CountryDetail from './Components/MainContent/CountryDetail';
 
 function App() {
   const themeContext = useContext(ThemeContext);
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route exact path='/' element={<MainContent/>} />
             <Route path='/region/:regionName' element={<MainContent/>} />
+            <Route path='/country/:countryName' element={<CountryDetail/>} />
           </Routes>
         </ContentContainer>
       </Router>

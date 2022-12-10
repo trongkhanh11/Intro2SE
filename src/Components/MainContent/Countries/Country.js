@@ -1,28 +1,32 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeContext } from '../../ThemeContext/themeContext';
 
-function Country () {
+function Country (props) {
+    const {country} = props;
     const themeContext = useContext(ThemeContext);
 
     return (
-        <CountryCard className={themeContext.theme}>
+        <Link to={`/country/${country.name}`}>
+            <CountryCard className={themeContext.theme}>
                 <div className="flag">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1024px-Flag_of_Vietnam.svg.png" alt="" />
+                    <img src={country.flag} alt="" />
                 </div>
                 <CountryInfo>
-                    <h3>Viet Nam</h3>
+                    <h3>{country.name}</h3>
                     <div>Population:
-                        <span> 97,338,579</span>
+                        <span> {country.population}</span>
                     </div>
                     <div>Region:
-                        <span> Asia</span>
+                        <span>{country.region}</span>
                     </div>
                     <div>Capital:
-                        <span> Ha Noi</span>
+                        <span>{country.capital}</span>
                     </div>
                 </CountryInfo>
             </CountryCard>
+        </Link>
     )
 }
 

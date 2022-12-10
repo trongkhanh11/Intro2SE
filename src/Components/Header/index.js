@@ -2,12 +2,15 @@ import styled from 'styled-components'
 import SwitchMode from './SwitchMode';
 import {ThemeContext} from '../ThemeContext/themeContext';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
     const themeContext = useContext(ThemeContext);
     return (
         <HeaderPane className={themeContext.theme}>
-            <span>Where in the world?</span>
+            <Link to ='/'>
+                <span>Where in the world?</span>
+            </Link>
             <SwitchMode />
         </HeaderPane>
     )
@@ -28,5 +31,7 @@ const HeaderPane = styled.div`
         font-size: 24px;
         font-weight: bold;
         text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        user-select: none;
     }
 `
